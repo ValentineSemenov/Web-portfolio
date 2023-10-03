@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Montserrat:wght@500&family=Poppins:wght@400;500;700&display=swap');
+
+.photo-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  
+    td {
+      position: relative;
+  
+      img {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        transition: filter 0.3s; 
+      }
+  
+      p {
+        margin-left: 220px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+      }
+  
+     
+      &:hover img {
+        filter: brightness(0.7); 
+      }
+  
+      img[title]::after {
+        content: attr(title);
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+  
+      img[title]:hover::after {
+        opacity: 1;
+      }
+    }
+  }
