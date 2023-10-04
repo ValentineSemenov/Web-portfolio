@@ -28,7 +28,8 @@
                     <option value="18-25">18-25</option>
                     <option value="26-35">26-35</option>
                     <option value="36-45">36-45</option>
-                    <option value="46+">46+</option>
+                    <option value="46+">46-65</option>
+                    <option value="46+">65+</option>
                 </select>
             </div>
 
