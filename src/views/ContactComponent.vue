@@ -1,11 +1,11 @@
 <template>
     <div class="contact">
         <h1 class="title">Контакты</h1>
-        <form action="mailto:semenov.vualya@gmail.com" method="POST">
+        <form id="Contact-form" action="mailto:semenov.vualya@gmail.com" method="POST">
         <div class="form">
             <div class="form-item">
                 <label for="FIO" class="form-label">Фамилия Имя Очевство </label>
-                <input type="text" id="FIO" name="name" class="form-input" placeholder="Введите ФИО">
+                <input type="text" id="FIO" name="name" class="form-input" placeholder="Введите ФИО" pattern="^\S+\s\S+\s\S+$">
             </div>
 
             <div class="form-item">
@@ -38,6 +38,11 @@
                 <input type="email" id="email" name="email" placeholder="Введите e-mail" class="form-input">
             </div>
 
+            <div class="form-item">
+                <label for="FIO" class="form-label">Номер телефона </label>
+                <input type="text" id="Phone" class="form-input" placeholder="Введите номер телефона" pattern="^(?:\+7|\+3)\d{9,11}$">
+            </div>
+
             <div class="buttons">
                 <button type="submit" class="form-button">Отправить</button>
                 <button type="reset" class="form-button">Очистить</button>
@@ -53,10 +58,5 @@
 
     
 
-<script>
-    import '../styles/ContactComponent.scss'
-
-    export default{
-        name: 'ContactComponent' 
-    }
+<script src="../js/ContactComponent.js">
 </script>
