@@ -17,10 +17,4 @@
     </div>
 </template>
 
-<script>
-    import '../styles/AboutMeComponent.scss'
-
-    export default{
-        name: 'AboutMeComponent'
-    }
-</script>
+<script src="../js/about.js"></script>

@@ -1,9 +1,11 @@
 import '../styles/PhotoAlbumComponent.scss';
+import { updatePageHistory } from './historyFunction';
 
 export default {
   name: 'PhotoAlbumComponent',
   mounted() {
     createPhotoAlbum();
+    updatePageHistory();
   },
 };
 
@@ -60,11 +62,39 @@ export function createPhotoAlbum() {
     img.alt = titles[i];
     img.title = titles[i];
 
+    const modalImage = document.createElement("div");
+    
+    modalImage.classList.add("modal")
+    modalImage.id = titles[i];
+
+    const closeModalImage = document.createElement("span");
+    closeModalImage.classList.add("close")
+    closeModalImage.innerHTML = "&times;";
+
+    const imageContentModal = document.createElement("img");
+    imageContentModal.classList.add("modal-content");
+    imageContentModal.id = fotos[i];
+    imageContentModal.src = require(`../assets/images/${fotos[i]}`);
+
+    modalImage.appendChild(closeModalImage);
+    modalImage.appendChild(imageContentModal);
+    
     const p = document.createElement('p');
     p.textContent = titles[i];
 
     cell.appendChild(img);
     cell.appendChild(p);
+    cell.appendChild(modalImage);
+
+    img.addEventListener('click', () => {
+        modalImage.style.display = "block";
+        document.body.style.overflow = "hidden";
+    });
+
+    closeModalImage.addEventListener('click', () => {
+        modalImage.style.display = "none";
+        document.body.style.overflow = "auto";
+    });
     currentRow.appendChild(cell);
   }
 }

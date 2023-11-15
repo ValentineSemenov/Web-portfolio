@@ -8,15 +8,3 @@
 
 <script src="../js/PhotoAlbumComponent.js">
 </script>
-
-<!-- <script>
-import { createPhotoAlbum } from '../js/PhotoAlbumComponent.js';
-
-export default {
-  name: 'PhotoAlbumComponent',
-  mounted() {
-    createPhotoAlbum();
-  },
-};
-</script> -->
-

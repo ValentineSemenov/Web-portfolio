@@ -7,11 +7,5 @@
             <img class="image" src="../assets/images/Sukuna.jpg" alt="">
     </div>    
 </template>
-<script>
-    import '../styles/HomeComponent.scss'
 
-    export default{
-        name: 'HomeComponent' 
-    }
-
-</script>
+<script src="../js/home.js"></script>

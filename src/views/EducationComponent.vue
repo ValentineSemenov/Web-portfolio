@@ -152,11 +152,5 @@
     </div>
     </template>
 
-<script>
-    import '../styles/EducationComponent.scss'
-
-    export default{
-        name: 'EducationComponent' 
-    }
-</script>
+    <script src="../js/education.js"></script>
     

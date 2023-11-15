@@ -1,4 +1,5 @@
 import '../styles/InterestsComponent.scss'
+import { updatePageHistory } from './historyFunction';
 
 function createList(...interests) {
     const menu = document.querySelector('.menu');
@@ -69,7 +70,8 @@ export default{
             name: "Видеоигры",
             elemsLi: ["Sekiro", "Dark Souls", "Ведьмак 3", "Resident Evil"],
         };
-
+        
+        updatePageHistory();
         createList(hobby, books, anime, countries, music, avto, games);
     } 
 }

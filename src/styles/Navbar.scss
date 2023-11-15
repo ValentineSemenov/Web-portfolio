@@ -18,8 +18,30 @@
         color: black;
     }
 
-    
+    .interests-dropdown {
+        position: relative;
 
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+
+            a {
+                display: block;
+                margin: 5px 0;
+                font-size: 14px;
+                font-family: 'Montserrat', sans-serif;
+                text-align: center;
+            }
+        }
+
+        &:hover {
+            .dropdown-content {
+                
+                display: block;
+            }
+        }
+    }
     .navbar {
         display: flex;
         
@@ -30,6 +52,7 @@
             font-size: 20px;
             margin-left: 30px;
             color: black;
+            
         }
     
     }
@@ -49,4 +72,24 @@
         width: 100%;
     }
 
+
+    nav li ul {
+        margin-top: 0px;
+        padding: 0;
+        position: absolute;
+        left: 0;
+        width: 160px;
+        // display: none;
+    }
+
+    nav li ul li {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, .1);
+
+    }
+
+    nav li:hover > ul{
+        display: initial;
+    }
 }
+

@@ -1,9 +1,11 @@
 import '../styles/TestComponent.scss';
+import { updatePageHistory } from './historyFunction';
 
 export default {
   name: 'TestComponent',
   mounted(){
     this.validateTestForm();
+    updatePageHistory();
   },
   methods: {
     validateTestForm() {
