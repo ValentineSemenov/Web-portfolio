@@ -26,8 +26,8 @@ function updateOverallHistory(currentPage) {
 export function getCookie(title) {
     const cookies = document.cookie.split('; ');
 
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].split('=');
+    for (let index = 0; index < cookies.length; index++) {
+        const cookie = cookies[index].split('=');
 
         if (cookie[0] === title) {
             return cookie[1];

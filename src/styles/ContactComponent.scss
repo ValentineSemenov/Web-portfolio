@@ -20,8 +20,22 @@
         width: 100%;
     }
 
+    .popover {
+        position: absolute;
+        text-wrap: nowrap;
+        padding: 10px;
+        
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        
+        font-size: 14px;
+        color: #333;
+    }
+
     .form-item{
         padding: 0px 0px 20px 0px;
+
+        
     }
 
     .form-label{
@@ -209,5 +223,68 @@
             }
         }
     }
-
+    .modal-contact {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+        
+    
+        .modal-content {
+            display: block;
+            width: 500px;
+            height: 160px;
+            border: 1px solid #0f0f0f;
+            background-color: white;
+            border-radius: 8px;
+            
+    
+            .modal-title {
+                font-size: 18px;
+                font-family: 'Montserrat', sans-serif;
+                text-align: center;
+            }
+    
+            .modal-button-container {
+                display: flex;
+                justify-content: flex-end;
+                padding: 40px 20px;
+                
+                button {
+                    cursor: pointer;
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                }
+    
+                #send-modal {
+                    margin-right: 10px;
+                    
+                    color: black;
+                    border: none;
+    
+                    &:hover {
+                        background-color: #999;
+                    }
+                }
+    
+                #close-modal {
+                    
+                    color: black;
+                    border: none;
+    
+                    &:hover {
+                        background-color: #999;
+                    }
+                }
+            }
+        }
+    }
 }

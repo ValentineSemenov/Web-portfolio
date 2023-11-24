@@ -1,11 +1,14 @@
 <template>
+
+
+
     <div class="contact">
         <h1 class="title">Контакты</h1>
         <form action="mailto:semenov.vualya@gmail.com" method="POST">
         <div class="form">
             <div class="form-item">
                 <label for="name" class="form-label">Фамилия Имя Отчество <span id="required">*</span></label>
-                <input type="text" id="name" name="name" class="form-input" placeholder="Введите ФИО" pattern="^\S+\s\S+\s\S+$">
+                <input type="text" id="name" name="name" class="form-input" placeholder="Введите ФИО" pattern="^\S+\s\S+\s\S+$" data-popover='Иванов Иван Иванович'>
                 <div class="error-message"></div>
             </div>
 
@@ -53,7 +56,7 @@
 
             <div class="form-item">
                 <label for="email" class="form-label">E-mail <span id="required">*</span></label>
-                <input type="email" id="email" name="email" placeholder="Введите e-mail" class="form-input">
+                <input type="email" id="email" name="email" placeholder="Введите e-mail" class="form-input" data-popover="example@example.com">
                 <div class="error-message"></div>
             </div>
             
@@ -61,7 +64,7 @@
 
             <div class="form-item">
                 <label for="phone" class="form-label">Телефон <span id="required">*</span></label>
-                <input for="phone" type="text" id="phone" class="form-input" placeholder="Введите номер телефона" pattern="^(?:\+7|\+3)\d{9,11}$">
+                <input for="phone" type="text" id="phone" class="form-input" placeholder="Введите номер телефона" pattern="^(?:\+7|\+3)\d{9,11}$" data-popover="+7/+3xxxxxxxxx">
                 <div class="error-message"></div>
             </div>
 
@@ -80,16 +83,28 @@
                 </div>  
             </div>
 
-
             <div class="buttons">
                 <button type="submit" id="send" class="form-button">Отправить</button>
                 <button type="reset" id="clear" class="form-button">Очистить</button>
-                
             </div>
+
+            
 
         </div>
         </form>
+        <div class="modal-contact" id="modalSubmit">
+            <div class="modal-content">
+                <div class="modal-title">
+                    <p>Вы действительно хотите это сделать?</p>
+                </div>
+                <div class="modal-button-container">
+                    <button id="send-modal" type="submit">Да</button>
+                    <button id="close-modal">Нет</button>
+                </div>
+            </div>
+        </div>
     </div> 
+
 
 
 </template>

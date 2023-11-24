@@ -1,34 +1,37 @@
 import '../styles/InterestsComponent.scss'
 import { updatePageHistory } from './historyFunction';
+import $ from 'jquery';
 
 function createList(...interests) {
-    const menu = document.querySelector('.menu');
-    const interestsContainer = document.querySelector('.interests');
+    const menu = $('.menu');
+    const interestsContainer = $('.interests');
   
     for (let { id, name, elemsLi } of interests) {
-
-      const link = document.createElement('a');
-      link.href = `#${id.toLowerCase()}`;
-      const h1 = document.createElement('h1');
-      h1.textContent = name;
-      link.appendChild(h1);
-      menu.appendChild(link);
+      const link = $('<a>');
+      link.attr('href', `#${id.toLowerCase()}`);
   
-
-      const interestDiv = document.createElement('div');
-      interestDiv.classList.add(id); 
-      const h1Interest = document.createElement('h1');
-      h1Interest.textContent = name;
-      h1Interest.id = id;
-      interestDiv.appendChild(h1Interest);
+      const h1 = $('<h1>');
+      h1.text(name);
+  
+      link.append(h1);
+      menu.append(link);
+  
+      const interestDiv = $('<div>');
+      interestDiv.addClass(id);
+  
+      const h1Interest = $('<h1>');
+      h1Interest.text(name);
+      h1Interest.attr('id', id);
+  
+      interestDiv.append(h1Interest);
   
       for (let elem of elemsLi) {
-        const li = document.createElement('li');
-        li.textContent = elem;
-        interestDiv.appendChild(li);
+        const li = $('<li>');
+        li.text(elem);
+        interestDiv.append(li);
       }
   
-      interestsContainer.appendChild(interestDiv);
+      interestsContainer.append(interestDiv);
     }
   }
 

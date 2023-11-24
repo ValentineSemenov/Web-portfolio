@@ -1,5 +1,6 @@
 import '../styles/TestComponent.scss';
 import { updatePageHistory } from './historyFunction';
+import $ from 'jquery';
 
 export default {
   name: 'TestComponent',
@@ -9,19 +10,18 @@ export default {
   },
   methods: {
     validateTestForm() {
-      const form = document.querySelector('.contactTest form');
-      const formElements = form.elements;
+      const form = $('.contactTest form');
+      const formElements = form[0].elements;
     
-    
-      form.addEventListener("submit", function (e) {
+      form.on("submit", function (e) {
         e.preventDefault();
         let isFormValid = true;
     
         for (let i = 0; i < formElements.length; i++) {
-          const element = formElements[i];
+          const element = $(formElements[i]);
     
-          if (element.type === "text") {
-            if (!element.value) {
+          if (element.attr('type') === "text") {
+            if (!element.val()) {
               isFormValid = false;
               alert("Пожалуйста, заполните все обязательные поля.");
               element.focus();
@@ -29,9 +29,9 @@ export default {
             }
           }
     
-          if (element.type === "radio") {
-            const radioGroupName = element.name;
-            const radioGroup = document.getElementsByName(radioGroupName);
+          if (element.attr('type') === "radio") {
+            const radioGroupName = element.attr('name');
+            const radioGroup = $(`input[name="${radioGroupName}"]`);
             let isRadioGroupValid = false;
     
             for (let j = 0; j < radioGroup.length; j++) {
@@ -48,17 +48,17 @@ export default {
             }
           }
         }
-
-        const question1Input = document.getElementById('question1')
-        const value = question1Input.value.trim();
+    
+        const question1Input = $('#question1');
+        const value = question1Input.val().trim();
         if (!/\d/.test(value)) {
           alert("Пожалуйста, введите целочисленное значение.");
           question1Input.focus();
         }
-
+    
         if (isFormValid) {
           alert("Форма заполнена корректно. Данные могут быть отправлены.");
-          form.reset();
+          form[0].reset();
         }
       });
     }

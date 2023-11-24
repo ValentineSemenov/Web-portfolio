@@ -1,13 +1,6 @@
 import '../styles/PhotoAlbumComponent.scss';
 import { updatePageHistory } from './historyFunction';
-
-export default {
-  name: 'PhotoAlbumComponent',
-  mounted() {
-    createPhotoAlbum();
-    updatePageHistory();
-  },
-};
+import $ from 'jquery';
 
 export const fotos = [
   "aeth0.jpg",
@@ -45,56 +38,121 @@ export const titles = [
   "Photo 15",
 ];
 
-export function createPhotoAlbum() {
-  const photoAlbumElem = document.querySelector('.photo-table table tbody');
+let position = 0;
+let movePosition = 0;
 
-  for (let i = 0; i < fotos.length; i++) {
-    if (i % 3 === 0) {
-      const newRow = document.createElement('tr');
-      photoAlbumElem.appendChild(newRow);
+export default {
+  name: 'PhotoAlbumComponent',
+  data() {
+    return {
+        photoAlbumElement: null,
+    };
+  },
+  mounted() {
+    this.createPhotoAlbum();
+    updatePageHistory();
+    const sliderItemsCount = fotos.length;
+    const sliderItemWidth = $('.slider-item').width();
+
+    $('.next').on('click', () => {
+        position += 1;
+        movePosition -= sliderItemWidth;
+        
+        this.setPosition(movePosition);
+        this.checkButtons(sliderItemsCount, sliderItemWidth);
+    });
+
+    $('.prev').on('click', () => {
+        position -= 1;
+        movePosition += sliderItemWidth;
+        
+        this.setPosition(movePosition);
+        this.checkButtons(sliderItemsCount, sliderItemWidth);
+    });
+  },
+  methods: {
+    setPosition(sliderItemWidth) {
+        $('.slider-item').css({
+            transform: `translateX(${sliderItemWidth}px)`,
+            transition: 'transform 0.5s',
+        });
+    },
+    checkButtons(sliderItemsCount, sliderItemWidth) {
+        const maxPosition = (sliderItemsCount - 1) * sliderItemWidth;
+        
+        if (position < 0) {
+            position = sliderItemsCount - 1;
+            movePosition = -maxPosition;
+        } else if (position >= sliderItemsCount) {
+            position = 0;
+            movePosition = 0;
+        }
+  
+        this.setPosition(movePosition);
+    },
+    createPhotoAlbum(sliderItemWidth) {
+      const modalContainer = $('.modal');
+      const modalCloseElement = $('.close');
+      const photoAlbumElement = $('.photo-table table tbody');
+      const sliderTrack = $('.slider-track');
+    
+      for (let i = 0; i < fotos.length; i++) {
+        if (i % 3 === 0) {
+          const newRow = $('<tr>');
+          photoAlbumElement.append(newRow);
+        }
+    
+
+        const currentRow = photoAlbumElement.children().last();
+        const cell = $('<td>');
+    
+        const img = $('<img>');
+        img.attr('src', require(`../assets/images/${fotos[i]}`));
+        img.attr('alt', titles[i]);
+        img.attr('title', titles[i]);
+
+        const sliderItem = $('<div>').addClass('slider-item');
+
+        img.attr({
+            src: require(`../assets/images/${fotos[i]}`),
+            alt: titles[i],
+        }).addClass('photo');
+
+        const sliderImg = $('<img>').attr({
+          src: require(`../assets/images/${fotos[i]}`),
+          alt: titles[i],
+      }).addClass('slider-photo');
+    
+        const modalImage = $('<div>');
+        modalImage.addClass('modal');
+        modalImage.attr('id', titles[i]);
+    
+        const p = $('<p>');
+        p.text(titles[i]);
+    
+        cell.append(img);
+        cell.append(p);
+
+        img.on('click', () => {
+          modalImage.css('display', 'flex');
+          sliderItemWidth = $('.slider-item').width();
+          position = i;
+          movePosition = -(position * sliderItemWidth);
+
+          this.setPosition(movePosition);
+          modalContainer.css('display', 'block');
+      });
+    
+      modalCloseElement.on('click', () => {
+        modalContainer.css('display', 'none');
+      });
+    
+        currentRow.append(cell);
+        sliderItem.append(sliderImg);
+        sliderTrack.append(sliderItem);
+      }
+      return photoAlbumElement;
     }
+  },
+};
 
-    const currentRow = photoAlbumElem.lastElementChild;
-    const cell = document.createElement('td');
-
-    const img = document.createElement('img');
-    img.src = require(`../assets/images/${fotos[i]}`);
-    img.alt = titles[i];
-    img.title = titles[i];
-
-    const modalImage = document.createElement("div");
-    
-    modalImage.classList.add("modal")
-    modalImage.id = titles[i];
-
-    const closeModalImage = document.createElement("span");
-    closeModalImage.classList.add("close")
-    closeModalImage.innerHTML = "&times;";
-
-    const imageContentModal = document.createElement("img");
-    imageContentModal.classList.add("modal-content");
-    imageContentModal.id = fotos[i];
-    imageContentModal.src = require(`../assets/images/${fotos[i]}`);
-
-    modalImage.appendChild(closeModalImage);
-    modalImage.appendChild(imageContentModal);
-    
-    const p = document.createElement('p');
-    p.textContent = titles[i];
-
-    cell.appendChild(img);
-    cell.appendChild(p);
-    cell.appendChild(modalImage);
-
-    img.addEventListener('click', () => {
-        modalImage.style.display = "block";
-        document.body.style.overflow = "hidden";
-    });
-
-    closeModalImage.addEventListener('click', () => {
-        modalImage.style.display = "none";
-        document.body.style.overflow = "auto";
-    });
-    currentRow.appendChild(cell);
-  }
-}
